@@ -31,7 +31,9 @@ import {
   Smartphone,
   Server,
   Bot,
+  ExternalLink,
 } from "lucide-react";
+import { MermaidDiagram } from "@/components/MermaidDiagram";
 
 export default function LandingPage() {
   const [formData, setFormData] = useState({
@@ -112,6 +114,19 @@ export default function LandingPage() {
         "最小限の機能で市場検証可能なMVP",
         "ユーザーフィードバックに基づく迅速な改善",
       ],
+      flowDiagram: `graph LR
+    A[ヒアリング<br/>1-2日] --> B[要件定義<br/>2-3日]
+    B --> C[設計<br/>3-5日]
+    C --> D[開発<br/>7-14日]
+    D --> E[テスト<br/>2-3日]
+    E --> F[リリース<br/>1日]
+
+    style A fill:#e0f7fa,stroke:#0d9488,stroke-width:2px
+    style F fill:#c8e6c9,stroke:#0d9488,stroke-width:2px
+    style B fill:#14b8a6,stroke:#0d9488,stroke-width:2px
+    style C fill:#14b8a6,stroke:#0d9488,stroke-width:2px
+    style D fill:#14b8a6,stroke:#0d9488,stroke-width:2px
+    style E fill:#14b8a6,stroke:#0d9488,stroke-width:2px`,
     },
     {
       icon: Target,
@@ -124,6 +139,19 @@ export default function LandingPage() {
         "柔軟な優先順位変更に対応",
       ],
       recommended: true,
+      flowDiagram: `gantt
+    title 2週間スプリント（例）
+    dateFormat  YYYY-MM-DD
+    section Sprint1
+    計画       :done, 2026-02-05, 1d
+    開発       :active, 2026-02-06, 8d
+    レビュー   :2026-02-14, 2d
+    振り返り   :2026-02-16, 1d
+    section Sprint2
+    計画       :2026-02-19, 1d
+    開発       :2026-02-20, 8d
+    レビュー   :2026-02-28, 2d
+    振り返り   :2026-03-02, 1d`,
     },
     {
       icon: Shield,
@@ -135,6 +163,23 @@ export default function LandingPage() {
         "相場より高品質なものを適正価格で",
         "明確なマイルストーンと納品スケジュール",
       ],
+      flowDiagram: `graph TD
+    A[要件確認<br/>1週間] --> B[基本設計<br/>1-2週間]
+    B --> C[詳細設計<br/>1-2週間]
+    C --> D[開発フェーズ1<br/>2-4週間]
+    D --> E[中間レビュー<br/>2-3日]
+    E --> F[開発フェーズ2<br/>2-4週間]
+    F --> G[総合テスト<br/>1週間]
+    G --> H[納品<br/>1-2日]
+
+    style A fill:#e0f7fa,stroke:#0d9488,stroke-width:2px
+    style H fill:#c8e6c9,stroke:#0d9488,stroke-width:2px
+    style B fill:#14b8a6,stroke:#0d9488,stroke-width:2px
+    style C fill:#14b8a6,stroke:#0d9488,stroke-width:2px
+    style D fill:#14b8a6,stroke:#0d9488,stroke-width:2px
+    style E fill:#14b8a6,stroke:#0d9488,stroke-width:2px
+    style F fill:#14b8a6,stroke:#0d9488,stroke-width:2px
+    style G fill:#14b8a6,stroke:#0d9488,stroke-width:2px`,
     },
   ];
 
@@ -186,6 +231,103 @@ export default function LandingPage() {
     },
   ];
 
+  const pricingExamples = [
+    {
+      system: "予約管理システム",
+      use: "美容院・クリニック・会議室予約",
+      marketPrice: "400～600万円",
+      primaPrice: "300～450万円",
+      reduction: "25%"
+    },
+    {
+      system: "在庫管理システム",
+      use: "小売店・倉庫の在庫追跡・発注管理",
+      marketPrice: "500～800万円",
+      primaPrice: "375～600万円",
+      reduction: "25%"
+    },
+    {
+      system: "勤怠管理システム",
+      use: "従業員のタイムカード・シフト管理",
+      marketPrice: "400～700万円",
+      primaPrice: "300～525万円",
+      reduction: "25%"
+    },
+    {
+      system: "顧客管理システム（CRM）",
+      use: "営業履歴・商談管理・分析機能",
+      marketPrice: "400～800万円",
+      primaPrice: "300～600万円",
+      reduction: "25%"
+    },
+    {
+      system: "経費精算システム",
+      use: "経費申請・承認・精算の自動化",
+      marketPrice: "300～600万円",
+      primaPrice: "225～450万円",
+      reduction: "25%"
+    },
+    {
+      system: "ECサイト・オンラインストア",
+      use: "商品管理・決済・配送連携（中規模）",
+      marketPrice: "500～1000万円",
+      primaPrice: "375～750万円",
+      reduction: "25%"
+    },
+    {
+      system: "社内ナレッジRAG",
+      use: "社内Wiki・FAQをAIに学習させた自動応答システム",
+      marketPrice: "400～600万円",
+      primaPrice: "280～420万円",
+      reduction: "30%"
+    },
+  ];
+
+  const pricingSources = [
+    {
+      system: "予約管理システム",
+      source: "予約システムとは？費用目安や開発会社の選び方を紹介",
+      url: "https://hnavi.co.jp/knowledge/blog/reservation-system-cost/",
+      publisher: "発注ラウンジ"
+    },
+    {
+      system: "在庫管理システム",
+      source: "在庫管理システムの開発費用・相場は？システムの種類や導入時のポイントも解説【2025年最新版】",
+      url: "https://system-kanji.com/posts/inventory-control-price",
+      publisher: "システム幹事"
+    },
+    {
+      system: "勤怠管理システム",
+      source: "【シミュレーション付き】勤怠管理システム開発費用の相場まとめ【2025年最新版】",
+      url: "https://walker-s.co.jp/media/attendance-management-system-development-cost/",
+      publisher: "株式会社Walkers"
+    },
+    {
+      system: "顧客管理システム（CRM）",
+      source: "顧客管理システム（CRM）の相場費用と導入における見積もりのポイント",
+      url: "https://hnavi.co.jp/knowledge/blog/customer-management-system-cost/",
+      publisher: "発注ラウンジ"
+    },
+    {
+      system: "経費精算システム",
+      source: "経費精算システムの費用相場はいくら？補助金についても解説！",
+      url: "https://meetsmore.com/product-services/expense-management/media/189857",
+      publisher: "MeetsMore"
+    },
+    {
+      system: "ECサイト・オンラインストア",
+      source: "ECサイト構築費用の相場と内訳を解説！【2025年版】",
+      url: "https://docodoor.co.jp/staffblog/ecsite-cost/",
+      publisher: "株式会社ドコドア"
+    },
+    {
+      system: "社内ナレッジRAG",
+      source: "RAG開発・構築のコストと費用の相場：予算と見積もり",
+      url: "https://blog.ripla.co.jp/2025/07/10/rag%E9%96%8B%E7%99%BA%E3%83%BB%E6%A7%8B%E7%AF%89%E3%81%AE%E3%82%B3%E3%82%B9%E3%83%88%E3%81%A8%E8%B2%BB%E7%94%A8%E3%81%AE%E7%9B%B8%E5%A0%B4%EF%BC%9A%E4%BA%88%E7%AE%97%E3%81%A8%E8%A6%8B%E7%A9%8D/",
+      publisher: "株式会社ripla"
+    },
+  ];
+
   const useCases = [
     {
       title: "社内ナレッジのAI化",
@@ -202,6 +344,36 @@ export default function LandingPage() {
       result: "モダンなWebアプリへ変身",
     },
   ];
+
+  const useCaseDiagrams: Record<string, string> = {
+    "社内ナレッジのAI化": `sequenceDiagram
+    participant 社員
+    participant RAGシステム
+    participant ベクトルDB
+    participant AI(Claude)
+
+    社員->>RAGシステム: 質問を入力
+    RAGシステム->>ベクトルDB: 類似文書を検索
+    ベクトルDB-->>RAGシステム: 関連情報を返却
+    RAGシステ->>AI(Claude): コンテキスト+質問
+    AI(Claude)-->>RAGシステム: 回答を生成
+    RAGシステム-->>社員: 精度の高い回答`,
+    "業務システムの刷新": `graph TD
+    A[レガシーシステム<br/>C# .NET Framework] --> B{分析・設計}
+    B --> C[ビジネスロジック抽出]
+    B --> D[データベース設計]
+    C --> E[.NET Core移行]
+    D --> E
+    E --> F[Azure App Service]
+    F --> G[モダンWebアプリ<br/>React + REST API]
+    G --> H[保守性向上<br/>拡張性確保]
+
+    style A fill:#ffcccc
+    style G fill:#ccffcc
+    style H fill:#ccffcc
+    style E fill:#14b8a6
+    style F fill:#14b8a6`,
+  };
 
   const faqs = [
     {
@@ -477,7 +649,7 @@ export default function LandingPage() {
                         {plan.target}
                       </p>
                     </div>
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 mb-6">
                       {plan.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start">
                           <Check className="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
@@ -487,10 +659,189 @@ export default function LandingPage() {
                         </li>
                       ))}
                     </ul>
+
+                    {/* Development Flow Diagram */}
+                    {plan.flowDiagram && (
+                      <div className="mt-6">
+                        <Accordion type="single" collapsible className="border border-border rounded-lg">
+                          <AccordionItem value="flow" className="border-0">
+                            <AccordionTrigger className="px-4 text-sm font-medium hover:no-underline">
+                              開発フローを見る
+                            </AccordionTrigger>
+                            <AccordionContent className="px-4 pb-4">
+                              <MermaidDiagram
+                                chart={plan.flowDiagram}
+                                className="mt-2"
+                              />
+                            </AccordionContent>
+                          </AccordionItem>
+                        </Accordion>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Examples Section */}
+      <section className="py-20">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              システム別初期開発費用の比較
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              よくあるビジネスシステムの開発相場と、PrimaMateriaの開発費用を比較
+            </p>
+          </div>
+
+          {/* Price Reduction Mechanism Diagram */}
+          <div className="max-w-4xl mx-auto mb-16">
+            <Card className="bg-card border-border">
+              <CardHeader>
+                <CardTitle className="text-xl text-center flex items-center justify-center">
+                  <Sparkles className="h-5 w-5 mr-2 text-primary" />
+                  AI活用による価格削減の仕組み
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <MermaidDiagram
+                  chart={`graph LR
+    A[従来の開発<br/>人月単価ベース] -->|AI活用| B[Claude Code<br/>開発効率3-5倍]
+    B -->|工数削減分を<br/>価格に還元| C[市場相場の<br/>70-80%]
+    C --> D[お客様への<br/>価格メリット]
+
+    style A fill:#ffcccc
+    style B fill:#14b8a6
+    style C fill:#14b8a6
+    style D fill:#ccffcc`}
+                  className="mt-4"
+                />
+                <p className="text-sm text-muted-foreground text-center mt-4">
+                  生成AIを活用することで開発速度を3〜5倍に高め、その工数削減分を価格に反映しています
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="max-w-6xl mx-auto overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="text-left py-4 px-4 font-semibold text-foreground">システム例</th>
+                  <th className="text-left py-4 px-4 font-semibold text-foreground">用途</th>
+                  <th className="text-right py-4 px-4 font-semibold text-foreground">市場相場<br/><span className="text-xs font-normal text-muted-foreground">（初期開発費用）</span></th>
+                  <th className="text-right py-4 px-4 font-semibold text-foreground">PrimaMateria<br/><span className="text-xs font-normal text-muted-foreground">（初期開発費用）</span></th>
+                  <th className="text-center py-4 px-4 font-semibold text-primary bg-primary/5 rounded-t-lg">削減率</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pricingExamples.map((example, index) => (
+                  <tr key={index} className="border-b border-border hover:bg-card/50 transition-colors">
+                    <td className="py-4 px-4 font-medium text-foreground">{example.system}</td>
+                    <td className="py-4 px-4 text-muted-foreground text-sm">{example.use}</td>
+                    <td className="py-4 px-4 text-right text-muted-foreground">{example.marketPrice}</td>
+                    <td className="py-4 px-4 text-right font-medium text-primary">{example.primaPrice}</td>
+                    <td className="py-4 px-4 text-center font-bold text-green-500 bg-green-500/5">{example.reduction}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <Card className="bg-card border-border">
+              <CardContent className="pt-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">25%</div>
+                  <p className="text-sm text-muted-foreground">
+                    平均削減率（市場相場比）
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="bg-card border-border">
+              <CardContent className="pt-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">75～80%</div>
+                  <p className="text-sm text-muted-foreground">
+                    市場相場に対する価格
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="bg-primary/5 border-primary/30">
+              <CardContent className="pt-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">AI活用</div>
+                  <p className="text-sm text-muted-foreground">
+                    Claude Code による<br/>開発速度 3～5倍
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12 p-6 bg-accent/5 rounded-xl border border-accent/20">
+            <div className="flex items-start space-x-4">
+              <div className="p-2 bg-accent/20 rounded-lg flex-shrink-0">
+                <MessageSquare className="h-6 w-6 text-accent" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground mb-2">
+                  社内ナレッジRAG - AI活用による大幅削減
+                </h3>
+                <p className="text-sm text-muted-foreground mb-3">
+                  社内Wiki・マニュアル・FAQをAIに学習させたRAGシステムは、従来の問い合わせ管理システムと異なり、実装複雑度が低いため、開発コストを30%削減できます。自動応答率の向上により、運用コストも大幅削減が可能です。
+                </p>
+                <div className="flex items-center space-x-4 text-sm">
+                  <span className="text-green-500 font-medium">市場相場比 30%削減</span>
+                  <span className="text-muted-foreground">一覧表の最後の行をご参照ください</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 出典・参考情報セクション */}
+          <div className="mt-8 max-w-6xl mx-auto">
+            <Accordion type="single" collapsible className="border border-border rounded-lg bg-card">
+              <AccordionItem value="sources" className="border-0">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-2">
+                    <ExternalLink className="w-4 h-4 text-primary" />
+                    <span className="font-semibold">出典・参考情報</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    上記の市場相場は、以下の調査記事・メディアを参考にしています。
+                  </p>
+                  <div className="space-y-4">
+                    {pricingSources.map((source, index) => (
+                      <div key={index} className="p-4 bg-secondary/30 rounded-lg border border-border hover:border-primary/30 transition-colors">
+                        <p className="font-semibold text-sm text-foreground mb-1">{source.system}</p>
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-primary hover:text-primary/80 hover:underline inline-flex items-center gap-1"
+                        >
+                          {source.source}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                        <p className="text-xs text-muted-foreground mt-1">出典: {source.publisher}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-4 pt-4 border-t border-border">
+                    ※ 上記の市場相場は参考値であり、実際の開発費用はプロジェクトの規模・要件により異なります。詳細なお見積もりはお問い合わせください。
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>
@@ -666,6 +1017,25 @@ export default function LandingPage() {
                       </span>
                     </p>
                   </div>
+
+                  {/* Mermaid Diagram */}
+                  {useCaseDiagrams[useCase.title] && (
+                    <div className="mt-6">
+                      <Accordion type="single" collapsible className="border border-border rounded-lg">
+                        <AccordionItem value="diagram" className="border-0">
+                          <AccordionTrigger className="px-4 text-sm font-medium hover:no-underline">
+                            システム構成図を表示
+                          </AccordionTrigger>
+                          <AccordionContent className="px-4 pb-4">
+                            <MermaidDiagram
+                              chart={useCaseDiagrams[useCase.title]}
+                              className="mt-2"
+                            />
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
